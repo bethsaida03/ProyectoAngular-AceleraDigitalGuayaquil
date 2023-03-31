@@ -1,0 +1,79 @@
+<form [formGroup]="formularioCliente" class="was-validated">
+  <div class='container-fluid'>
+    <h1>{{tituloPagina}}</h1>
+    <div class="row">
+      <div class="mb-3">
+        <label for="id" class="form-label">Id</label>
+        <input type="text" class="form-control" id="id" formControlName="id" required>
+        <div class="invalid-feedback">
+          Debe llenar el campo antes de enviar.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+        <div class="invalid-feedback">
+          Debe llenar el campo antes de enviar.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputApellido" class="form-label">Apellido</label>
+        <input type="apellido" class="form-control" id="exampleInputApellido" formControlName="apellido" required>
+        <div class="invalid-feedback">
+          Debe llenar el campo antes de enviar.
+        </div>
+      </div>
+      <div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" (click)="contactar()">
+          <label class="form-check-label" for="proporcionaDatos">¿Desea contacto?</label>
+        </div>
+
+        <div class="mb-3" *ngIf="quiereContacto">
+          <label for="email" class="form-label">Dirección de correo</label>
+          <input type="email" class="form-control" id="email" aria-describedby="correoHelp"
+            formControlName="email">
+          <div id="correoHelp" class="form-text">Nunca compartiremos tu correo con nadie.</div>
+          <div class="invalid-feedback">
+            Debe llenar el campo antes de enviar.
+          </div>
+        </div>
+        <div class="mb-3" *ngIf="quiereContacto">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="text" class="form-control" id="telefono"
+            aria-describedby="telefonoHelp" formControlName="telefono">
+          <div id="telefonoHelp" class="form-text">Tu teléfono está seguro con nosotros</div>
+          <div class="invalid-feedback">
+            Debe llenar el campo antes de enviar.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-md-block">
+        <button class="btn btn-primary" type="submit" (click)="guardarCliente()">Registra Cliente</button>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+  // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
+  (function () {
+    'use strict'
+
+    // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Bucle sobre ellos y evitar el envío
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
